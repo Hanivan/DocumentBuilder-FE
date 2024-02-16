@@ -1,8 +1,21 @@
+"use client";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { AuthStore } from "@/features/store/authStore";
 import Image from "next/image";
 import Link from "next/link";
 
 const Header = () => {
+  const [email, hashId] = AuthStore((s) => [s.email, s.hashId]);
+
+  console.log(
+    {
+      email,
+      hashId,
+    },
+    "==== after"
+  );
+
   return (
     <header className="shrink bg-slate-800 block w-full max-w-screen relative">
       <nav className="container">
@@ -24,7 +37,11 @@ const Header = () => {
               <ul className="flex flex-nowrap justify-end items-center m-0">
                 <li className="relative cursor-pointer">
                   <Link href={"/mydocuments"} className="text-white">
-                    My Form
+                    {![email, hashId]?.includes("") ? (
+                      <>{`${email}_${hashId}`}</>
+                    ) : (
+                      <>{"My Form"}</>
+                    )}
                   </Link>
                 </li>
               </ul>
