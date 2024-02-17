@@ -5,11 +5,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
-  const [email, hashId, token] = AuthStore((s) => [
-    s.email,
-    s.hashId,
-    s?.token,
-  ]);
+  const { email, hashId, token } = AuthStore((s) => ({
+    email: s?.email,
+    hashId: s?.hashId,
+    token: s?.token,
+  }));
 
   console.log(email, hashId, token);
   return (
